@@ -1,3 +1,3 @@
-“scripts”: {
- “start”: “node bot.js”
+scripts: {
+ “tart: “node bot.js
 }
