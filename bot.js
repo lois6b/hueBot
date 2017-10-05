@@ -7,7 +7,8 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = '466152875:AAEHmy_km5-w9vKpv9WjXUKBf4XKnCzsSyc';
 
 var commands = {
-	"battery" : "termux-battery-status"
+	"battery" : "termux-battery-status",
+	"location" : "termux-location -p network"
 	
 	
 }
