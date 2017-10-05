@@ -28,16 +28,24 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
   bot.sendMessage(chatId, resp);
 });
 
-bot.onText(/\/start/, (msg) => {
+bot.onText(/\/(start)/, (msg) => {
 
   const chatId = msg.chat.id;
 
   bot.sendMessage(chatId, "Bienvenido a mi móvil");
 });
 
-bot.onText(/\/battery/, (msg) => {
+bot.onText(/\/(\w+)/, (msg, match) => {
 
-	sendCommand( "termux-battery-status",msg);
+	var text  =  match[1];
+	if(text != "start"){
+		var command = commands[text];
+		if( command){
+			sendCommand( commands[command],msg);
+		}else{
+			bot.sendMessage(chatId, "No se reconoce ese comando");
+		}
+	}
 
 });
 
