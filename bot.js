@@ -54,13 +54,20 @@ function sendCommand(command, msg){
 	
 	const chatId = msg.chat.id;
 	exec(command, (error, stdout, stderr) => { 
-  	if (error) { 
-    		console.error(`exec error: ${error}`); return; 
-  	} 
-	  
- 	bot.sendMessage(chatId, stdout);
-  	consoleMsg(msg);
-  });
+		if (error) { 
+				console.error(`exec error: ${error}`); return; 
+		} 
+		consoleMsg(msg);
+		
+		if(command == "location"){
+			bot.sendLocation(chatId, stdout["latitude"] , stdout["longitude"]);
+		}
+		if(command == "battery"){
+			bot.sendMessage(chatId, stdout["percentage"] + "%");
+		}
+		//bot.sendMessage(chatId, stdout);
+		
+	});
 	
 }
 
