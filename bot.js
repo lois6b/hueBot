@@ -7,8 +7,9 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = '466152875:AAEHmy_km5-w9vKpv9WjXUKBf4XKnCzsSyc';
 
 var commands = {
-	"battery" : "termux-battery-status",
-	"location" : "termux-location -p network"
+	"battery"  : "termux-battery-status",
+	"location" : "termux-location -p network",
+	"picture"    : "termux-camera-photo -c 1 photos/test1"
 	
 	
 }
@@ -60,6 +61,16 @@ function sendCommand(command, msg){
 		if(command == "location"){
 			bot.sendLocation(chatId, json["latitude"] , json["longitude"]);
 		}
+		
+		if(command == "picture"){
+			console.log("making pic");
+			bot.sendPhoto({
+				hat_id : chatId,
+				caption: 'This is my test image',
+				photo: 'test.jpeg'//replace your image url here
+			})
+		}
+		
 		if(command == "battery"){
 			bot.sendMessage(chatId, json["percentage"] + "%");
 		}
