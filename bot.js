@@ -37,8 +37,14 @@ bot.onText(/\/start/, (msg) => {
 
 bot.onText(/\/battery/, (msg) => {
 
-  const chatId = msg.chat.id;
-  exec('termux-battery-status', (error, stdout, stderr) => { 
+	sendCommand( "termux-battery-status",msg);
+
+});
+
+function sendCommand(command, msg){
+	
+	const chatId = msg.chat.id;
+	exec(command, (error, stdout, stderr) => { 
   	if (error) { 
     		console.error(`exec error: ${error}`); return; 
   	} 
@@ -46,8 +52,8 @@ bot.onText(/\/battery/, (msg) => {
  	bot.sendMessage(chatId, stdout);
   	consoleMsg(msg);
   });
-
-});
+	
+}
 
 function consoleMsg(msg){
 	console.log("Message from: " + msg.from.first_name + " -> " + msg.text);
