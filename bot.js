@@ -56,9 +56,10 @@ function sendCommand(command, msg){
 		} 
 		consoleMsg(msg);
 		
-		var json = JSON.parse(stdout);
+		
 		
 		if(command == "location"){
+			var json = JSON.parse(stdout);
 			bot.sendLocation(chatId, json["latitude"] , json["longitude"]);
 		}
 		
@@ -72,6 +73,7 @@ function sendCommand(command, msg){
 		}
 		
 		if(command == "battery"){
+			var json = JSON.parse(stdout);
 			bot.sendMessage(chatId, json["percentage"] + "%");
 		}
 		//bot.sendMessage(chatId, json);
