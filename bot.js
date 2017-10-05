@@ -53,7 +53,7 @@ function sendCommand(command, msg){
 		if (error) { 
 				console.error(`exec error: ${error}`); return; 
 		} 
-		consoleMsg(command);
+		consoleMsg(msg);
 		
 		var json = JSON.parse(stdout);
 		
