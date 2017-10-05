@@ -41,7 +41,7 @@ bot.onText(/\/(\w+)/, (msg, match) => {
 	if(text != "start"){
 		var command = commands[text];
 		if( command){
-			sendCommand( commands[command],msg);
+			sendCommand( command,msg);
 		}else{
 			bot.sendMessage(chatId, "No se reconoce ese comando");
 		}
