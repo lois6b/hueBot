@@ -38,14 +38,10 @@ bot.onText(/\/(start)/, (msg) => {
 
 bot.onText(/\/(\w+)/, (msg, match) => {
 
-	var text  =  match[1];
-	if(text != "start"){
-		var command = commands[text];
-		if( command){
-			sendCommand( command,msg);
-		}else{
-			bot.sendMessage(chatId, "No se reconoce ese comando");
-		}
+	var command  =  match[1];
+	if(command != "start"){
+		sendCommand( command,msg);
+
 	}
 
 });
@@ -53,11 +49,11 @@ bot.onText(/\/(\w+)/, (msg, match) => {
 function sendCommand(command, msg){
 	
 	const chatId = msg.chat.id;
-	exec(command, (error, stdout, stderr) => { 
+	exec(commands[command], (error, stdout, stderr) => { 
 		if (error) { 
 				console.error(`exec error: ${error}`); return; 
 		} 
-		consoleMsg(msg);
+		consoleMsg(command);
 		
 		var json = JSON.parse(stdout);
 		
