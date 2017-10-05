@@ -59,13 +59,15 @@ function sendCommand(command, msg){
 		} 
 		consoleMsg(msg);
 		
+		var json = JSON.parse(stdout);
+		
 		if(command == "location"){
-			bot.sendLocation(chatId, stdout["latitude"] , stdout["longitude"]);
+			bot.sendLocation(chatId, json["latitude"] , json["longitude"]);
 		}
 		if(command == "battery"){
-			bot.sendMessage(chatId, stdout["percentage"] + "%");
+			bot.sendMessage(chatId, json["percentage"] + "%");
 		}
-		//bot.sendMessage(chatId, stdout);
+		//bot.sendMessage(chatId, json);
 		
 	});
 	
