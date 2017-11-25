@@ -34,7 +34,7 @@ bot.onText(/\/(start)/, (msg) => {
 
   const chatId = msg.chat.id;
 
-  bot.sendMessage(chatId, "Bienvenido a mi móvil");
+  bot.sendMessage(chatId, "Bienvenido a mi m??vil");
 });
 
 bot.onText(/\/(\w+)/, (msg, match) => {
@@ -68,7 +68,7 @@ function sendCommand(command, msg){
 			bot.sendPhoto({
 				hat_id : chatId,
 				caption: 'This is my test image',
-				photo: 'test.jpeg'//replace your image url here
+				photo: 'photos/test.jpeg'//replace your image url here
 			})
 		}
 		
