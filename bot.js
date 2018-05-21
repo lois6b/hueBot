@@ -99,8 +99,6 @@ function getPic(){
   console.log(json.data.memes);
   return rndURL(json.data.memes);
 });
-	
-	
 }
 
 function rndURL(array){
