@@ -1,5 +1,8 @@
 const TelegramBot = require('node-telegram-bot-api');
 var request = require('request');
+var cheerio = require('cheerio');
+
+
 
 var comandos = ["/start",
 	"/echo",
@@ -33,6 +36,17 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 	const resp = match[1]; // the captured "whatever"
 
 	bot.sendMessage(chatId, resp);
+});
+
+bot.onText(/\/9gag ?(.+)?/, (msg, match) => {
+	request('https://9gag.com/', function (err, resp, html) {
+		if (!err) {
+			const $ = cheerio.load(html);
+			var urls = $(".main-wrap").find('source[type="video/mp4"]').map(function() { return this.src; }).get();
+			urlspicArr.forEach(
+				picURL => sendFile(picURL, chatId)).catch(_ => bot.sendMessage(chatId, "Error retrieving the image"))
+		}
+	});
 });
 
 bot.onText(/\/giphy ?(.+)?/, (msg, match) => {
