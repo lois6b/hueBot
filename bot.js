@@ -35,12 +35,13 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 	bot.sendMessage(chatId, resp);
 });
 
-bot.onText(/\/giphy/, (msg, match) => {
+bot.onText(/\/giphy( .+)?/, (msg, match) => {
 
 	const chatId = msg.chat.id;
+	const num = Number(match[1]);
 	bot.sendChatAction(chatId, "typing");
 
-	getGiphy().then(picURL => sendFile(picURL, chatId)).catch(_ => bot.sendMessage(chatId, "Error retrieving the image"));
+	getGiphy(num).then(picURL => sendFile(picURL, chatId)).catch(_ => bot.sendMessage(chatId, "Error retrieving the image"));
 
 });
 
@@ -64,19 +65,17 @@ bot.onText(/\/pic +(.+)/, (msg, match) => {
 
 });
 
-function getGiphy() {
+function getGiphy(num=1) {
 
 	return new Promise((resolve) => {
 		//return rndURL(pics);
-		request({ url: 'http://api.giphy.com/v1/gifs/trending?api_key=kGHLB8MgkdfU9zPF4OMqOKgD6RXymTlR', json: true }, function (err, res, json) {
+		request({ url: 'http://api.giphy.com/v1/gifs/trending?api_key=kGHLB8MgkdfU9zPF4OMqOKgD6RXymTlR&limit=' + num, json: true }, function (err, res, json) {
 			if (err) {
 				throw err;
 			}
-			var arr = json.data;
-			var elem = arr[Math.floor(Math.random() * arr.length)].images.original.url;
+			var arr = json.data.map(elem => elem.images.original.url);
 
-
-			resolve(elem);
+			resolve(arr);
 		});
 
 	});
