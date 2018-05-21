@@ -43,7 +43,7 @@ bot.onText(/\/pic/, (msg, match) => {
 		url: 'https://i.stack.imgur.com/xp2lX.jpg',
 		encoding: null
 	};
-	
+	const chatId = msg.chat.id;
 	request(requestSettings, function (error, response, buffer) {
 		if (!error && response.statusCode == 200) {
 			bot.sendPhoto(chatId, buffer)
