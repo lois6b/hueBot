@@ -35,13 +35,13 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 	bot.sendMessage(chatId, resp);
 });
 
-bot.onText(/\/meme/, (msg, match) => {
+bot.onText(/\/giphy/, (msg, match) => {
 
 	const chatId = msg.chat.id;
 	bot.sendChatAction(chatId, "typing");
 
-	getPic().then( picURL => sendPic(picURL, chatId)).catch( _ => bot.sendMessage(chatId, "Error retrieving the image"));
-	
+	getGiphy().then(picURL => sendFile(picURL, chatId)).catch(_ => bot.sendMessage(chatId, "Error retrieving the image"));
+
 });
 
 bot.onText(/\/pic +(.+)/, (msg, match) => {
@@ -50,15 +50,21 @@ bot.onText(/\/pic +(.+)/, (msg, match) => {
 
 	const url = match[1];
 
-	bot.sendChatAction(chatId, "typing");
+	if (url.trim() != "") {
 
-	console.log("tring to fetch: " + url);
+		bot.sendChatAction(chatId, "typing");
 
-	sendPic(url, chatId);
-	
+		console.log("tring to fetch: " + url);
+
+		sendFile(url, chatId);
+	} else {
+		bot.sendMessage(chatId, "No URL specified");
+
+	}
+
 });
 
-function getPic() {
+function getGiphy() {
 
 	return new Promise((resolve) => {
 		//return rndURL(pics);
@@ -69,14 +75,14 @@ function getPic() {
 			var arr = json.data;
 			var elem = arr[Math.floor(Math.random() * arr.length)].images.original.url;
 
-			
+
 			resolve(elem);
 		});
 
 	});
 }
 
-function sendPic(url, chatId) {
+function sendFile(url, chatId) {
 
 	var requestSettings = {
 		url: url,
@@ -87,7 +93,7 @@ function sendPic(url, chatId) {
 	request(requestSettings, function (error, response, buffer) {
 		if (!error && response.statusCode == 200) {
 			console.log("sent");
-			if (url.endsWith(".gif") || url.endsWith(".mp4") ) {
+			if (url.endsWith(".gif") || url.endsWith(".mp4")) {
 				bot.sendDocument(chatId, buffer)
 			} else {
 				bot.sendPhoto(chatId, buffer)
