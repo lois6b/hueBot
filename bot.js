@@ -35,10 +35,11 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 	bot.sendMessage(chatId, resp);
 });
 
-bot.onText(/\/giphy( .+)?/, (msg, match) => {
+bot.onText(/\/giphy ?(.+)?/, (msg, match) => {
 
 	const chatId = msg.chat.id;
 	const num = Number(match[1]);
+	num = num || 1;
 	bot.sendChatAction(chatId, "typing");
 
 	getGiphy(num).then(
@@ -47,27 +48,7 @@ bot.onText(/\/giphy( .+)?/, (msg, match) => {
 
 });
 
-bot.onText(/\/pic (.+)/, (msg, match) => {
-
-	const chatId = msg.chat.id;
-
-	const url = match[1];
-
-	if (url.trim() != "") {
-
-		bot.sendChatAction(chatId, "typing");
-
-		sendFile(url, chatId).catch(_ => bot.sendMessage(chatId, "Error retrieving the image"));
-		
-	} else {
-
-		bot.sendMessage(chatId, "No URL specified");
-
-	}
-
-});
-
-function getGiphy(num = 1) {
+function getGiphy(num) {
 
 	return new Promise((resolve) => {
 		//return rndURL(pics);
