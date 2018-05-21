@@ -41,7 +41,7 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 bot.onText(/\/pic( .+)?/, (msg, match) => {
 
 	const chatId = msg.chat.id;
-	var resp = match[1];
+	const resp = match[1];
 
 	var url =  resp ? resp : 'https://i.imgur.com/g8dfYnq.png';
 	
@@ -49,28 +49,20 @@ bot.onText(/\/pic( .+)?/, (msg, match) => {
 		url: url,
 		encoding: null
 	};
-	if(resp && resp.endsWith(".gif")){
-		request(requestSettings, function (error, response, buffer) {
-			if (!error && response.statusCode == 200) {
+
+	request(requestSettings, function (error, response, buffer) {
+		if (!error && response.statusCode == 200) {
+			if(resp && resp.endsWith(".gif")){
 				bot.sendDocument(chatId, buffer)
-			}
-			else{
-	
-				bot.sendMessage(chatId, "error retrieving the gif");
-			}
-		});
-	}else{
-		request(requestSettings, function (error, response, buffer) {
-			if (!error && response.statusCode == 200) {
+			}else{
 				bot.sendPhoto(chatId, buffer)
 			}
-			else{
-	
-				bot.sendMessage(chatId, "error retrieving the pic");
-			}
-		});
-	}
-	
+		}
+		else{
+
+			bot.sendMessage(chatId, "error retrieving the pic");
+		}
+	});
   });
 
 bot.onText(/\/start/, (msg) => {
