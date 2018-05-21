@@ -58,6 +58,7 @@ bot.on('message', (msg) => {
 		if(msg.text.includes("vives")){
 			bot.sendLocation(chatId, 43.2351181, -5.7755287);
 		}else{
+			bot.sendChatAction(chatId, "typing");
 			bot.sendMessage(chatId, generateText());
 		}
 	}
