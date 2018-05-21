@@ -39,7 +39,6 @@ bot.onText(/\/giphy ?(.+)?/, (msg, match) => {
 
 	const chatId = msg.chat.id;
 	var num = Number(match[1]);
-	num = num || 1;
 	bot.sendChatAction(chatId, "typing");
 
 	getGiphy(num).then(
@@ -48,7 +47,7 @@ bot.onText(/\/giphy ?(.+)?/, (msg, match) => {
 
 });
 
-function getGiphy(num) {
+function getGiphy(num = 25) {
 
 	return new Promise((resolve) => {
 		//return rndURL(pics);
