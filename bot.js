@@ -70,7 +70,7 @@ bot.onText(/\/start/, (msg) => {
 
   const chatId = msg.chat.id;
 
-  bot.sendMessage(chatId, "Bienvenido a mis huevos redondos v.3");
+  bot.sendMessage(chatId, "Bienvenido a mis huevos redondos v.4");
 });
 
 
