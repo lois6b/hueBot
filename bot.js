@@ -96,7 +96,7 @@ function getPic(){
   if (err) {
     throw err;
   }
-  console.log(json);
+  return rndURL(json.data.memes);
 });
 	
 	
@@ -104,5 +104,5 @@ function getPic(){
 
 function rndURL(array){
 	
-	return array[Math.floor(Math.random()*array.length)];
+	return array[Math.floor(Math.random()*array.length)].url;
 }
