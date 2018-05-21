@@ -49,6 +49,7 @@ bot.onText(/\/pic( .+)?/, (msg, match) => {
 		url: url,
 		encoding: null
 	};
+	
 
 	request(requestSettings, function (error, response, buffer) {
 		if (!error && response.statusCode == 200) {
