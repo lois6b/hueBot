@@ -38,7 +38,7 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 bot.onText(/\/giphy ?(.+)?/, (msg, match) => {
 
 	const chatId = msg.chat.id;
-	const num = Number(match[1]);
+	var num = Number(match[1]);
 	num = num || 1;
 	bot.sendChatAction(chatId, "typing");
 
