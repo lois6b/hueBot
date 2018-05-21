@@ -3,7 +3,7 @@ var request = require('request');
 
 var comandos = ["/start",
 	"/echo",
-	"/pic"
+	"/meme"
 ];
 // replace the value below with the Telegram token you receive from @BotFather
 const token = '428109668:AAGHXQ2kHCXS2dAA1wiyJabNozxz9Czw8TQ';
@@ -35,12 +35,24 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 	bot.sendMessage(chatId, resp);
 });
 
-bot.onText(/\/pic/, (msg, match) => {
+bot.onText(/\/meme/, (msg, match) => {
 
 	const chatId = msg.chat.id;
-	bot.sendChatAction(chatId, "Searching meme");
+	bot.sendChatAction(chatId, "typing");
 
 	getPic().then( picURL => sendPic(picURL, chatId));
+	
+});
+
+bot.onText(/\/pic +(.+)/, (msg, match) => {
+
+	const chatId = msg.chat.id;
+
+	const url = match[1];
+
+	bot.sendChatAction(chatId, "typing");
+
+	 sendPic(url, chatId);
 	
 });
 
