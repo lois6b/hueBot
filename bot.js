@@ -52,7 +52,9 @@ bot.onText(/\/pic +(.+)/, (msg, match) => {
 
 	bot.sendChatAction(chatId, "typing");
 
-	 sendPic(url, chatId);
+	console.log("tring to fetch: " + url);
+
+	sendPic(url, chatId);
 	
 });
 
@@ -67,7 +69,7 @@ function getPic() {
 
 			var elem = json.data.memes[Math.floor(Math.random() * json.data.memes.length)].url;
 
-			console.log(elem);
+			
 			resolve(elem);
 		});
 
