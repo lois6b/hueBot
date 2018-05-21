@@ -41,7 +41,7 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 bot.onText(/\/pic( .+)?/, (msg, match) => {
 
 	const chatId = msg.chat.id;
-	const resp = match[1];
+	var resp = match[1];
 
 	var url =  resp ? resp : 'https://i.imgur.com/g8dfYnq.png';
 	
