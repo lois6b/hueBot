@@ -1,4 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
+var request = require('request');
 var mensajes = ["Comeme los huevos", 
 				"Me saben los huevos a aceituna", 
 				"Programo en Java y te meto la raba", 
