@@ -41,7 +41,9 @@ bot.onText(/\/giphy( .+)?/, (msg, match) => {
 	const num = Number(match[1]);
 	bot.sendChatAction(chatId, "typing");
 
-	getGiphy(num).then(picURL => sendFile(picURL, chatId)).catch(_ => bot.sendMessage(chatId, "Error retrieving the image"));
+	getGiphy(num).then( 
+		picArr => picArr.forEach(
+			picURL => sendFile(picURL, chatId)).catch(_ => bot.sendMessage(chatId, "Error retrieving the image")));
 
 });
 
@@ -59,6 +61,7 @@ bot.onText(/\/pic +(.+)/, (msg, match) => {
 
 		sendFile(url, chatId);
 	} else {
+		
 		bot.sendMessage(chatId, "No URL specified");
 
 	}
