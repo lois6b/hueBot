@@ -37,7 +37,7 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
   bot.sendMessage(chatId, resp);
 });
 
-bot.onText(/\/pic (.+)/, (msg, match) => {
+bot.onText(/\/pic/, (msg, match) => {
 	var requestSettings = {
 		url: 'https://i.stack.imgur.com/xp2lX.jpg',
 		encoding: null
