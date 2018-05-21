@@ -84,7 +84,7 @@ function sendPic(url, chatId) {
 
 	request(requestSettings, function (error, response, buffer) {
 		if (!error && response.statusCode == 200) {
-			if (url.endsWith(".gif")) {
+			if (url.endsWith(".gif") || url.endsWith(".mp4") ) {
 				bot.sendDocument(chatId, buffer)
 			} else {
 				bot.sendPhoto(chatId, buffer)
