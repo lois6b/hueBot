@@ -49,7 +49,7 @@ bot.onText(/\/pic( .+)?/, (msg, match) => {
 		url: url,
 		encoding: null
 	};
-	
+
 
 	request(requestSettings, function (error, response, buffer) {
 		if (!error && response.statusCode == 200) {
@@ -70,7 +70,7 @@ bot.onText(/\/start/, (msg) => {
 
   const chatId = msg.chat.id;
 
-  bot.sendMessage(chatId, "Bienvenido a mis huevos redondos v.2");
+  bot.sendMessage(chatId, "Bienvenido a mis huevos redondos v.3");
 });
 
 
