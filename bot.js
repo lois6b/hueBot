@@ -40,7 +40,7 @@ bot.onText(/\/meme/, (msg, match) => {
 	const chatId = msg.chat.id;
 	bot.sendChatAction(chatId, "typing");
 
-	getPic().then( picURL => sendPic(picURL, chatId));
+	getPic().then( picURL => sendPic(picURL, chatId)).catch( _ => bot.sendMessage(chatId, "Error retrieving the image"));
 	
 });
 
@@ -92,7 +92,7 @@ function sendPic(url, chatId) {
 		}
 		else {
 
-			bot.sendMessage(chatId, "Error retrieving the image");
+			throw error;
 		}
 	});
 
