@@ -49,7 +49,7 @@ bot.onText(/\/pic( .+)?/, (msg, match) => {
 		url: url,
 		encoding: null
 	};
-	if(res && resp.endsWith(".gif")){
+	if(resp && resp.endsWith(".gif")){
 		request(requestSettings, function (error, response, buffer) {
 			if (!error && response.statusCode == 200) {
 				bot.sendDocument(chatId, buffer)
