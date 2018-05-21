@@ -15,7 +15,8 @@ var mensajes = ["Comeme los huevos",
 				];
 				
 var comandos= ["/start",
-			   "/echo"
+			   "/echo",
+			   "/pic"
 			  ];
 // replace the value below with the Telegram token you receive from @BotFather
 const token = '428109668:AAGHXQ2kHCXS2dAA1wiyJabNozxz9Czw8TQ';
@@ -35,6 +36,19 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
   // send back the matched "whatever" to the chat
   bot.sendMessage(chatId, resp);
 });
+
+bot.onText(/\/pic (.+)/, (msg, match) => {
+	var requestSettings = {
+		url: 'https://i.stack.imgur.com/xp2lX.jpg',
+		encoding: null
+	};
+	
+	request(requestSettings, function (error, response, buffer) {
+		if (!error && response.statusCode == 200) {
+			bot.sendPhoto(chatId, buffer)
+		}
+	});
+  });
 
 bot.onText(/\/start/, (msg) => {
 
