@@ -1,6 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 var request = require('request');
-var mensajes = ["Comeme los huevos", 
+var pics = ["Comeme los huevos", 
 				"Me saben los huevos a aceituna", 
 				"Programo en Java y te meto la raba", 
 				"Me comes el huevo en enero si no es primero",
@@ -43,7 +43,7 @@ bot.onText(/\/pic( .+)?/, (msg, match) => {
 	const chatId = msg.chat.id;
 	const resp = match[1];
 
-	var url =  resp ? resp : 'https://i.imgur.com/g8dfYnq.png';
+	var url =  resp ? resp : getPic();
 	
 	var requestSettings = {
 		url: url,
@@ -73,14 +73,6 @@ bot.onText(/\/start/, (msg) => {
   bot.sendMessage(chatId, "Meme bot v.1");
 });
 
-
-/*bot.on('sticker', (msg) => {
-	const chatId = msg.chat.id;
-    bot.sendPhoto(chatId, "http://i.imgur.com/VRYdhuD.png");
-});*/
-
-// Listen for any kind of message. There are different kinds of
-// messages.
 bot.on('message', (msg) => {
 	if( !msg.text.startsWith("/")){
 		console.log('Received your message: ' + msg.text + " - From: " + msg.from.first_name);
@@ -89,7 +81,7 @@ bot.on('message', (msg) => {
 			bot.sendLocation(chatId, 43.2351181, -5.7755287);
 		}else{
 			bot.sendChatAction(chatId, "typing");
-			bot.sendMessage(chatId, generateText());
+			bot.sendMessage(chatId, getPic());
 		}
 	}
 });
@@ -97,21 +89,20 @@ bot.on('message', (msg) => {
 
 
 
-function generateText(){
+function getPic(){
 	
-	//10% of the time it will say: 
-	var txt10 ="En el cielo las estrellas, en el suelo el alambrado. Y en la raja de tu culo mi chorizo colorado";
-
-	if(Math.random() > 0.8){
-		//.log(txt)
-		return txt10;
-	}else{
-		return rndMensaje(mensajes);
-	}
+		//return rndURL(pics);
+		request({url: 'https://api.imgflip.com/get_memes', json: true}, function(err, res, json) {
+  if (err) {
+    throw err;
+  }
+  console.log(json);
+});
+	
 	
 }
 
-function rndMensaje(array){
+function rndURL(array){
 	
 	return array[Math.floor(Math.random()*array.length)];
 }
