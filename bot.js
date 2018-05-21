@@ -62,12 +62,12 @@ function getPic() {
 
 	return new Promise((resolve) => {
 		//return rndURL(pics);
-		request({ url: 'https://api.imgflip.com/get_memes', json: true }, function (err, res, json) {
+		request({ url: 'http://api.giphy.com/v1/gifs/trending?api_key=kGHLB8MgkdfU9zPF4OMqOKgD6RXymTlR', json: true }, function (err, res, json) {
 			if (err) {
 				throw err;
 			}
-
-			var elem = json.data.memes[Math.floor(Math.random() * json.data.memes.length)].url;
+			var arr = json.data;
+			var elem = arr[Math.floor(Math.random() * arr.length)].images.original.url;
 
 			
 			resolve(elem);
@@ -86,6 +86,7 @@ function sendPic(url, chatId) {
 
 	request(requestSettings, function (error, response, buffer) {
 		if (!error && response.statusCode == 200) {
+			console.log("sent");
 			if (url.endsWith(".gif") || url.endsWith(".mp4") ) {
 				bot.sendDocument(chatId, buffer)
 			} else {
