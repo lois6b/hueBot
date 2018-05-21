@@ -43,7 +43,7 @@ bot.onText(/\/9gag ?(.+)?/, (msg, match) => {
 		if (!err) {
 			const $ = cheerio.load(html);
 			var urls = $(".main-wrap").find('source[type="video/mp4"]').map(function() { return this.src; }).get();
-			urlspicArr.forEach(
+			urls.forEach(
 				picURL => sendFile(picURL, chatId)).catch(_ => bot.sendMessage(chatId, "Error retrieving the image"))
 		}
 	});
