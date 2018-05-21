@@ -43,7 +43,7 @@ bot.onText(/\/pic( .+)?/, (msg, match) => {
 	const chatId = msg.chat.id;
 	const resp = match[1];
 
-	var url =  resp ? resp : 'https://i.stack.imgur.com/xp2lX.jpg';
+	var url =  resp ? resp : 'https://i.imgur.com/g8dfYnq.png';
 	
 	var requestSettings = {
 		url: url,
@@ -52,7 +52,11 @@ bot.onText(/\/pic( .+)?/, (msg, match) => {
 
 	request(requestSettings, function (error, response, buffer) {
 		if (!error && response.statusCode == 200) {
-			bot.sendPhoto(chatId, buffer)
+			if(resp.endsWith(".gif")){
+				bot.sendDocument(chatId, buffer)
+			}else{
+				bot.sendPhoto(chatId, buffer)
+			}
 		}
 		else{
 
