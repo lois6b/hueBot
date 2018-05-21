@@ -50,7 +50,6 @@ bot.onText(/\/pic( .+)?/, (msg, match) => {
 		encoding: null
 	};
 
-
 	request(requestSettings, function (error, response, buffer) {
 		if (!error && response.statusCode == 200) {
 			if(resp && resp.endsWith(".gif")){
