@@ -47,7 +47,7 @@ bot.onText(/\/giphy( .+)?/, (msg, match) => {
 
 });
 
-bot.onText(/\/pic +(.+)/, (msg, match) => {
+bot.onText(/\/pic (.+)/, (msg, match) => {
 
 	const chatId = msg.chat.id;
 
@@ -57,9 +57,8 @@ bot.onText(/\/pic +(.+)/, (msg, match) => {
 
 		bot.sendChatAction(chatId, "typing");
 
-		console.log("tring to fetch: " + url);
-
-		sendFile(url, chatId);
+		sendFile(url, chatId).catch(_ => bot.sendMessage(chatId, "Error retrieving the image"));
+		
 	} else {
 
 		bot.sendMessage(chatId, "No URL specified");
@@ -94,7 +93,7 @@ function sendFile(url, chatId) {
 
 	request(requestSettings, function (error, response, buffer) {
 		if (!error && response.statusCode == 200) {
-			console.log("sent");
+			console.log("sent: " + url);
 			if (url.endsWith(".gif") || url.endsWith(".mp4")) {
 				bot.sendDocument(chatId, buffer)
 			} else {
