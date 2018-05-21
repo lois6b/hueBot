@@ -96,6 +96,7 @@ function getPic(){
   if (err) {
     throw err;
   }
+  console.log(json.data.memes);
   return rndURL(json.data.memes);
 });
 	
