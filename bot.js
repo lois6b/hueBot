@@ -49,20 +49,28 @@ bot.onText(/\/pic( .+)?/, (msg, match) => {
 		url: url,
 		encoding: null
 	};
-
-	request(requestSettings, function (error, response, buffer) {
-		if (!error && response.statusCode == 200) {
-			if(resp.endsWith(".gif")){
+	if(resp.endsWith(".gif")){
+		request(requestSettings, function (error, response, buffer) {
+			if (!error && response.statusCode == 200) {
 				bot.sendDocument(chatId, buffer)
-			}else{
+			}
+			else{
+	
+				bot.sendMessage(chatId, "error retrieving the gif");
+			}
+		});
+	}else{
+		request(requestSettings, function (error, response, buffer) {
+			if (!error && response.statusCode == 200) {
 				bot.sendPhoto(chatId, buffer)
 			}
-		}
-		else{
-
-			bot.sendMessage(chatId, "error retrieving the pic");
-		}
-	});
+			else{
+	
+				bot.sendMessage(chatId, "error retrieving the pic");
+			}
+		});
+	}
+	
   });
 
 bot.onText(/\/start/, (msg) => {
