@@ -38,11 +38,12 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
 	bot.sendMessage(chatId, resp);
 });
 
-bot.onText(/\/9gag ?(.+)?/, (msg, match) => {
+bot.onText(/\/9gag/, (msg, match) => {
 	request('https://9gag.com/', function (err, resp, html) {
 		if (!err) {
 			const $ = cheerio.load(html);
 			var urls = $(".main-wrap").find('source[type="video/mp4"]').map(function() { return this.src; }).get();
+			console.log(urls);
 			urls.forEach(
 				picURL => sendFile(picURL, chatId).catch(_ => bot.sendMessage(chatId, "Error retrieving the image")))
 		}
