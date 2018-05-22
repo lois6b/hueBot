@@ -43,8 +43,7 @@ bot.onText(/\/9gag/, (msg, match) => {
 	const chatId = msg.chat.id;
 	get9gag().then( 
 		urls => urls.forEach(
-			picURL => sendFile(picURL, chatId)).catch(_ => bot.sendMessage(chatId, "Error retrieving the image"))
-	);
+			picURL => sendFile(picURL, chatId))).catch(_ => bot.sendMessage(chatId, "Error retrieving the image"));
 });
 
 
