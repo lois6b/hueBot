@@ -7,7 +7,7 @@ var comandos = ["/start",
 	"/meme"
 ];
 // replace the value below with the Telegram token you receive from @BotFather
-const token = process.env.TELEGRAM-KEY;
+const token = process.env.TELEGRAM_KEY;
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
