@@ -7,7 +7,7 @@ var comandos = ["/start",
 	"/meme"
 ];
 // replace the value below with the Telegram token you receive from @BotFather
-const token = '428109668:AAGHXQ2kHCXS2dAA1wiyJabNozxz9Czw8TQ';
+const token = process.env.TELEGRAM-KEY;
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, { polling: true });
@@ -51,8 +51,6 @@ bot.onText(/\/9gag/, (msg, match) => {
 
 		}).catch(_ => bot.sendMessage(chatId, "Error retrieving the image"));
 });
-
-
 
 bot.onText(/\/giphy ?(.+)?/, (msg, match) => {
 
