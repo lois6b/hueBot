@@ -2,8 +2,6 @@ const TelegramBot = require('node-telegram-bot-api');
 var request = require('request');
 var cheerio = require('cheerio');
 
-
-
 var comandos = ["/start",
 	"/echo",
 	"/meme"
@@ -17,7 +15,6 @@ const bot = new TelegramBot(token, { polling: true });
 bot.on('message', (msg) => {
 	if (!msg.text.startsWith("/")) {
 		console.log('Received your message: ' + msg.text + " - From: " + msg.from.first_name);
-		const chatId = msg.chat.id;
 	}
 });
 
@@ -82,9 +79,9 @@ function get9gag() {
 			if (!err) {
 				const $ = cheerio.load(html);
 				var urls = $(".main-wrap").find('source[type="video/mp4"]').map(function () { return this.src; }).get();
-				console.log(urls);
+				console.log($(".main-wrap"));
 
-				resolve(urls);
+				//resolve(urls);
 			}
 		});
 	});
